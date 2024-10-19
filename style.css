@@ -428,6 +428,13 @@ body {
 #card>img{
 	width: calc(100vw/3);
 	margin-top: calc(-100vw/15);
+	transition: transform 0.3s ease, z-index 0.3s ease;
+
+}
+
+#card>img:hover{
+	z-index: 5000;
+	transition: transform 0.3s ease, z-index 0.3s ease;
 
 }
 
