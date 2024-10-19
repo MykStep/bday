@@ -2,10 +2,302 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Happy Birthday Chi</title>
   </head>
   <body>
-    <h1>Hello ...</h1>
+    <h1 class="text-style main-hello" id="intro-text">Hello ...</h1>
+    <div class="pixel-bubble" style="display: none">
+        Pixelated Box Content
+    </div>
+    <div id="player-selection-container" class="pixel-bubble">
+    	<span class="text-style">Select player !</span>
+    	<div id="character-selection-container">
+	    	<div class="character-selection-box tilt-effect" onclick="document.getElementById('intro-text').innerHTML = 'Hello my Ponopopo!!! Happy Birthday 🎉';proceedToGame('chi')">
+	    		<img src="./img/chi.png">
+	    	</div>
+	    	<div class="character-selection-box tilt-effect" onclick="document.getElementById('intro-text').innerHTML = 'Hello my Boba Chi!!! Happy Birthday 🎉';proceedToGame('boba')">
+	    		<img src="./img/boba.png">
+	    	</div>
+	    	<div class="character-selection-box tilt-effect" onclick="document.getElementById('intro-text').innerHTML = 'Hello my Little Squirrel!!! Happy Birthday 🎉';proceedToGame('squirrel')">
+	    		<img src="./img/squirrel.png">
+	    	</div>
+	    	<div class="character-selection-box tilt-effect" onclick="document.getElementById('intro-text').innerHTML = 'Hello my Babytron!!! Happy Birthday 🎉';proceedToGame('babytron')">
+	    		<img src="./img/babytron.png">
+	    	</div>
+	    	<div class="character-selection-box tilt-effect" onclick="document.getElementById('intro-text').innerHTML = 'Hello my Lil Koala!!! Happy Birthday 🎉';proceedToGame('koala')">
+	    		<img src="./img/koala.png">
+	    	</div>
+	    </div>
+	    <div id="start-button" style="margin: 10px 0 15px 0;display: none;justify-content: center;margin-bottom: 15px;"><div  class="text-style start-button" style="">START :)</div></div>
+	    
+    </div>
+    <div id="app" class="pixel-bubble" style="display: none">
+    	<div id="loader">Loading</div>
+    	<div id="app-container" style="display: none">
+    		<div id="question-stage" class="text-style"></div>
+    		<div id="question-title" class="text-style"></div>
+    		<div id="answer-container">
+    			<div class="mcq-answer" onclick="submitAnswer(0,0)">21st April 2022 BLADUFHDUFH</div>
+    		</div>
+    		<div id="next-button" style="margin: 10px 0 15px 0;display: none;justify-content: center;margin-bottom: 15px;"><div  class="text-style start-button" style="">NEXT :)</div></div>
+    		<div id="submit-button" style="margin: 10px 0 15px 0;display: none;justify-content: center;margin-bottom: 15px;"><div  class="text-style start-button" style="">NEXT :)</div></div>
+    		<div id="stats-block" style="display: none">
+    			<div>Lines of code: 1.3k +</div>
+    			<div>Time spent on this: 10hrs +</div>
+    		</div>
+    		<div id="card" style="display: none"><img src="./img/card.png"><div id="explanation" style="display: none">Use up the last 8 digits in the Whatsapp Message to claim your £15 🎁</div></div>
+    		
+    	</div>
+    	<div id="player"><img id="player-img"></div>
+    	<div id="comment-displace"><div class="comment-container"><div id="comment" class="text-style">What a time to be Mikkta's GF! Godaym I really really love him omg < 3</div></div></div>
+    </div>
+
   </body>
+  <script type="text/javascript">
+  	
+  	let player;
+
+  	let post = [];
+
+  	const questions = [
+  	{
+  		number: 1,
+  		stage: "SECURITY QUESTION",
+  		title: "When was our first date ?",
+  		type: "mcq",
+  		mcq: ["21st April 2022", "23rd April 2022", "25th April 2022"],
+  		correctness: 2,
+  		comment: "It's not like we ever managed to agree on it anyway :)"
+  	},
+  	{
+  		number: 2,
+  		stage: "1/3",
+  		title: "Do you love me ?",
+  		type: "mcq",
+  		mcq: ["No", "Maybe", "Yes"],
+  		comment: 'Istg if you pressed "No" Chi... >:( '
+  	}
+  	,
+  	{
+  		number: 3,
+  		stage: "2/3",
+  		title: "Who's the best cook in the relationship?",
+  		type: "mcq",
+  		mcq: ["50/50", "Chi", "Myk"],
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	},
+  	{
+  		number: 4,
+  		stage: "3/3",
+  		title: "What is my most annoying habit ?",
+  		type: "mcq",
+  		mcq: ["Debating", "Banter", "Being consistently the best bf ever"],
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	},
+  	{
+  		number: 5,
+  		stage: "1/6",
+  		title: "Okay. I wanna know how to treat you best. Fav flowers?",
+  		type: "mcq",
+  		mcq: ["Roses", "Tulips", "Lilies", "Peonies", "Carnations","Orchids"],
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	},
+  	{
+  		number: 6,
+  		stage: "2/6",
+  		title: "Which comfort food do you prefer?",
+  		type: "mcq",
+  		mcq: ["Pasta", "French Toast", "Chicken Corn Soup", "Broth + Noodles", "Pizza","Beef Stew"],
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	},
+  	{
+  		number: 7,
+  		stage: "3/6",
+  		title: "Amongst those date ideas that we haven't tried yet, which one excites you the most?",
+  		type: "mcq",
+  		mcq: ["Amusement Park", "Sauna/Wellness/Swimming Pool Date", "Watch motorsport IRL", "Fly in a baloon", "Bungee Jump","Hiking Trip"],
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	},
+  	{
+  		number: 8,
+  		stage: "4/6",
+  		title: "Which location do you look the most forward to?",
+  		type: "mcq",
+  		mcq: ["Bristol", "Isle of Man", "Belfast", "Glasgow", "Edinburgh","UK Coast"],
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	},
+  	{
+  		number: 9,
+  		stage: "5/6",
+  		title: "Can you pwease list your favourite author(s) 🥺?",
+  		type: "input",
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	},
+  	{
+  		number: 10,
+  		stage: "6/6",
+  		title: "One thing you wish was different about me",
+  		type: "input",
+  		comment: "Let's be honest here, we know you would have picked the 3rd"
+  	}
+
+  	];
+
+  	function loadFinalPage(){
+  		// # do an api call with all the info
+
+  		fetch('https://webhook.site/40f61f56-92fa-486f-ba82-b0470372e5d1', {
+        method: 'POST',
+        headers: {
+        	'Access-Control-Allow-Origin': null,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(post),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Form submitted successfully!');
+        }
+    })
+    .catch(error => {
+        console.error('Error submitting the form:', error);
+    });
+
+
+  		// write a nice message in the title and change stage to "END ❤️"
+  		document.getElementById("answer-container").remove();
+  		document.getElementById("next-button").style.display = "none";
+  		document.getElementById("submit-button").style.display = "none";
+
+  		document.getElementById("question-stage").innerHTML = "END ❤️";
+  		document.getElementById("question-title").innerHTML = "Thank you for taking the time to complete this (very) short game :)";
+  		// add block with stats
+  		document.getElementById("stats-block").style.display = "flex";
+  		// explain XXXX and show card in one div (make it visible)
+  		document.getElementById("card").style.display = "grid";
+  		document.getElementById("explanation").style.display = "block";
+  		document.getElementById("comment").innerHTML = "Happy Birthday Chi! I hope you have a great day with your family. As always, I wish I was here 😘🥺";
+  	}
+
+  	function proceedToGame(player) {
+  		player = player;
+  		console.log(player);
+
+  		// # Show start button and adapt player setting
+  		document.getElementById('start-button').style.display = "flex";
+  		document.getElementById('start-button').setAttribute("onclick","startGame('"+player+"')");
+  	}
+
+  	function startGame(player){
+  		document.getElementById('player-selection-container').style.display = "none";
+  		document.getElementById('player-img').src = "./img/" + player + ".png"
+  		document.getElementById('app').style.display = "block";
+  	}
+
+  	function submitAnswer(questionNumber,answerID) {
+  		console.log('selected: ' + answerID + " for question number: "+questionNumber)
+  		post.push('selected: ' + answerID + " for question number: "+questionNumber);
+  		// # Add score if needed
+  		// # Update state to "just answered"
+  			// ## reveal correctness
+  		if (questions[questionNumber].correctness) {
+  			for (var i = 0; i < questions[questionNumber].mcq.length; i++) {
+  				if(i == questions[questionNumber].correctness){
+  					document.getElementById('selectable-answer-' + i).classList.add("yuppy");
+  				} else {
+  					document.getElementById('selectable-answer-' + i).classList.add("wrong");
+  				}
+  				
+  			}
+  		}
+  			// ## add funny comment
+  		document.getElementById("comment").innerHTML = questions[questionNumber].comment;
+
+  			// ## add next button with loadQuestion(questionNumber + 1) as onclick attribute
+  		document.getElementById("next-button").style.display = "flex";
+  		document.getElementById('next-button').setAttribute("onclick","loadQuestion("+ (questionNumber + 1) +")");
+
+  	}
+
+  	function submitInput(questionNumber,value){
+  		console.log("Answered: " + value + " for question number: " + questionNumber);
+  		post.push("Answered: " + value + " for question number: " + questionNumber);
+  		if(questionNumber != 9) {
+  			loadQuestion(questionNumber + 1);
+  		} else {
+  			loadFinalPage();
+  		}
+  		
+  	}
+
+  	function addMcqOption(questionNumber,answerID, answerText){
+  		var questionElement = document.createElement("div");
+  		questionElement.classList.add("mcq-answer");
+  		questionElement.classList.add("text-style");
+  		questionElement.id = 'selectable-answer-' + answerID;
+  		questionElement.innerHTML = answerText;
+  		questionElement.setAttribute("onclick","submitAnswer("+ questionNumber + "," + answerID + ")");
+
+  		document.getElementById('answer-container').appendChild(questionElement);
+  	}
+
+  	function addInput(questionNumber){
+  		var questionElement = document.createElement("input");
+  		questionElement.classList.add("text-style");
+  		questionElement.classList.add("input");
+  		questionElement.id = 'input-answer-' + questionNumber;
+  		questionElement.addEventListener("input", () => {document.getElementById("submit-button").style.display = "flex";});
+  		document.getElementById("submit-button").addEventListener("click", () => {submitInput(questionNumber,questionElement.value);});
+
+  		document.getElementById('answer-container').appendChild(questionElement);
+  		document.getElementById('answer-container').style.display = "flex";
+  		document.getElementById('answer-container').style.justifyContent = "center";
+  	}
+  	
+  	function loadQuestion(index){
+  		// # Clear existing question
+  		document.getElementById("question-stage").innerHTML = "";
+  		document.getElementById("question-title").innerHTML = "";
+  		document.getElementById("answer-container").innerHTML = "";
+  		document.getElementById("next-button").style.display = "none";
+  		document.getElementById("comment").innerHTML = "What a time to be Mikkta's GF! Godaym I really really love him omg < 3";
+  		// # Setting variables
+  		var questionStage = questions[index].stage;
+  		var questionTitle = questions[index].title;
+  		// # Select correct question type
+  		var questionType = questions[index].type;
+  		// # Updating Question Title
+  		console.log(questionTitle);
+  		document.getElementById("question-stage").innerHTML = questionStage;
+  		document.getElementById("question-title").innerHTML = questionTitle;
+  		// # Answers with functionalities (conditional on question type) 
+  		if (questionType == "mcq") {
+  			for (let i=0; i<questions[index].mcq.length; i++){
+  				addMcqOption(index,i,questions[index].mcq[i]);
+  			}
+  		} else if (questionType == "input") {
+  			addInput(index);
+  		}
+  	}
+
+  	function stopLoader(){
+  		document.getElementById('loader').style.display = "none";
+  		document.getElementById('app-container').style.display = "flex";
+  		console.log("Done Loading");
+  	}
+
+  	function initiateApp() {
+
+  		loadQuestion(0);
+  		setTimeout(function() {stopLoader();}, 1000);
+  		return;
+  	}
+
+  	initiateApp();
+
+  </script>
 </html>

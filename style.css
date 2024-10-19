@@ -6,5 +6,438 @@
 }
 
 body {
-	background-color: grey;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	background-image: url('img/bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	height: 100vh;
+	padding: 80px
+}
+
+#character-selection-container{
+	display: flex;
+	justify-content: center;
+}
+
+.character-selection-box{
+
+}
+
+.character-selection-box>img{
+	width: calc(100vw / 7);
+}
+
+/* Pixelated Speech Bubble */
+.pixel-bubble {
+    background-color: white;
+    border: 4px solid #000;
+    color: black;
+    padding: 20px;
+    font-size: 16px;
+    position: relative;
+    
+    /* Add pixelated shadow */
+    box-shadow: 4px 4px 0px #5e5e5e;
+
+    
+
+    /* Ensure pixelated rendering */
+    image-rendering: pixelated;
+
+    transition: width 0.3s ease, height 0.3s ease, padding 0.3s ease;
+}
+
+/* Triangle (the speech bubble's tail) */
+.pixel-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;  /* Position it below the main bubble */
+    left: 30px;  /* Position it horizontally */
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #000;  /* Triangle border */
+}
+
+/* Inner white part of the triangle */
+.pixel-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -13px;  /* Align it inside the tail */
+    left: 31px;
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 13px solid white;  /* White fill inside */
+}
+
+.tilt-effect {
+    transform-origin: center; /* Set the origin to the center for the tilt */
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect: slightly larger and tilted to the right */
+.tilt-effect:hover {
+    transform: scale(1.1) rotate(5deg); /* 10% larger and 5 degrees tilt */
+    cursor: pointer;
+}
+
+.text-style {
+	font-family: "Pixelify Sans", sans-serif;
+}
+
+.start-button {
+    border: 4px solid #5b021e;
+    padding: 5px 20px 5px 20px;
+    font-size: 16px;
+    position: relative;
+    
+    /* Add pixelated shadow */
+    box-shadow: 4px 4px 0px #5e5e5e;
+
+    
+
+    /* Ensure pixelated rendering */
+    image-rendering: pixelated;
+
+    width: fit-content;
+    font-size: 25px;
+    background-color: #f17c2f;
+    color: #5b021e;
+
+    transform-origin: center; /* Set the origin to the center for the tilt */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    clip-path: polygon(
+    0px calc(100% - 8px),
+    4px calc(100% - 8px),
+    4px calc(100% - 4px),
+    8px calc(100% - 4px),
+    8px 100%,
+    calc(100% - 8px) 100%,
+    calc(100% - 8px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 8px),
+    100% calc(100% - 8px),
+    100% 8px,
+    calc(100% - 4px) 8px,
+    calc(100% - 4px) 4px,
+    calc(100% - 8px) 4px,
+    calc(100% - 8px) 0px,
+    8px 0px,
+    8px 4px,
+    4px 4px,
+    4px 8px,
+    0px 8px
+  );
+}
+
+.start-button:hover {
+    transform: scale(1.1) rotate(-7deg); /* 10% larger and 5 degrees tilt */
+    cursor: pointer;
+    background-color: #f17c2f;
+
+}
+
+#app{
+	height: 60vh;
+	position: relative;
+	overflow: hidden;
+}
+
+#player{
+	position: absolute;
+	bottom: calc(0px - (100vw / 20));
+	left: calc(0px - (100vw / 20));
+	transform: scale(1.1) rotate(14deg);
+}
+
+#player>img{
+	width: calc(100vw / 5);
+}
+
+#question-stage{
+	position: absolute;
+	top: -27px;
+	left: -28px;
+
+	border: 4px solid #5b021e;
+    padding: 5px 20px 5px 20px;
+    font-size: 16px;
+    position: relative;
+    
+    /* Add pixelated shadow */
+    box-shadow: 4px 4px 0px #5e5e5e;
+
+    
+
+    /* Ensure pixelated rendering */
+    image-rendering: pixelated;
+
+    width: fit-content;
+    font-size: 15px;
+    background-color: #f17c2f;
+    color: #5b021e;
+
+    transform-origin: center; /* Set the origin to the center for the tilt */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    clip-path: polygon(
+    0px calc(100% - 8px),
+    4px calc(100% - 8px),
+    4px calc(100% - 4px),
+    8px calc(100% - 4px),
+    8px 100%,
+    calc(100% - 8px) 100%,
+    calc(100% - 8px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 8px),
+    100% calc(100% - 8px),
+    100% 8px,
+    calc(100% - 4px) 8px,
+    calc(100% - 4px) 4px,
+    calc(100% - 8px) 4px,
+    calc(100% - 8px) 0px,
+    8px 0px,
+    8px 4px,
+    4px 4px,
+    4px 8px,
+    0px 8px
+  );
+}
+
+#app-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#question-title {
+	display: flex;
+	justify-content: center;
+	font-size: 35px;
+}
+
+#answer-container{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr; 
+    gap: 10px; /* Optional: Space between items */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.mcq-answer{
+	display: flex;
+	justify-content: center;
+
+	border: 4px solid #1d2942;
+    padding: 5px 20px 5px 20px;
+    font-size: 16px;
+    position: relative;
+    
+    /* Add pixelated shadow */
+    box-shadow: 4px 4px 0px #5e5e5e;
+
+    
+
+    /* Ensure pixelated rendering */
+    image-rendering: pixelated;
+
+    width: fit-content;
+    font-size: 25px;
+    background-color: #73a4a8;
+    color: #1d2942;
+    text-align: center;
+    align-items: center;
+    transform-origin: center; /* Set the origin to the center for the tilt */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    clip-path: polygon(
+    0px calc(100% - 8px),
+    4px calc(100% - 8px),
+    4px calc(100% - 4px),
+    8px calc(100% - 4px),
+    8px 100%,
+    calc(100% - 8px) 100%,
+    calc(100% - 8px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 8px),
+    100% calc(100% - 8px),
+    100% 8px,
+    calc(100% - 4px) 8px,
+    calc(100% - 4px) 4px,
+    calc(100% - 8px) 4px,
+    calc(100% - 8px) 0px,
+    8px 0px,
+    8px 4px,
+    4px 4px,
+    4px 8px,
+    0px 8px
+  );
+}
+
+.mcq-answer:hover{
+	border: 4px solid #222f6c;
+	background-color: #35a3d6;
+    color: #222f6c;
+    cursor: pointer;
+    transform: scale(1.1);
+    padding: 5px 20px 5px 20px;
+}
+
+#comment{
+	display: flex;
+	justify-content: center;
+	min-height: 80px;
+
+	border: 4px solid #4b2356;
+    padding: 5px 20px 5px 20px;
+    font-size: 16px;
+    position: relative;
+    
+    /* Add pixelated shadow */
+    box-shadow: 4px 4px 0px #5e5e5e;
+
+    
+
+    /* Ensure pixelated rendering */
+    image-rendering: pixelated;
+
+    width: fit-content;
+    font-size: 25px;
+    background-color: #f06a85;
+    color: #4b2356;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+
+    transform-origin: center; /* Set the origin to the center for the tilt */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    clip-path: polygon(
+    0px calc(100% - 8px),
+    4px calc(100% - 8px),
+    4px calc(100% - 4px),
+    8px calc(100% - 4px),
+    8px 100%,
+    calc(100% - 8px) 100%,
+    calc(100% - 8px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 8px),
+    100% calc(100% - 8px),
+    100% 8px,
+    calc(100% - 4px) 8px,
+    calc(100% - 4px) 4px,
+    calc(100% - 8px) 4px,
+    calc(100% - 8px) 0px,
+    8px 0px,
+    8px 4px,
+    4px 4px,
+    4px 8px,
+    0px 8px
+  );
+}
+
+
+.comment-container{
+	position: relative;
+
+}
+/* Triangle (the speech bubble's tail) */
+.comment-container::after {
+    content: '';
+    position: absolute;
+    bottom: 22px;  /* Position it below the main bubble */
+    left: -20px;  /* Position it horizontally */
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #000;  /* Triangle border */
+    transform: rotate(90deg);
+}
+
+/* Inner white part of the triangle */
+.comment-container::before {
+    content: '';
+    position: absolute;
+    bottom: 31px;  /* Align it inside the tail */
+    left: -13px;
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 13px solid white;  /* White fill inside */
+}
+
+#comment-displace{
+	position: absolute;
+	right: 30px;
+	bottom: 30px;
+	width: calc(65%)
+}
+
+.yuppy {
+
+	background-color: #5fba52;
+    color: #062d30;
+    border: 4px solid #062d30;
+}
+
+.wrong {
+	background-color: #af2523;
+    color: white;
+    border: 4px solid #0c1a41;
+}
+
+.yuppy:hover {
+
+	background-color: #5fba52;
+    color: #062d30;
+    border: 4px solid #062d30;
+}
+
+.wrong:hover {
+	background-color: #af2523;
+    color: white;
+    border: 4px solid #0c1a41;
+}
+
+.input{
+	font-size: 22px;
+}
+
+#stats-block{
+	display: flex;
+	margin-top: 10px;
+	justify-content: center;
+}
+
+#stats-block>div{
+	padding: 15px;
+	font-family: "Pixelify Sans", sans-serif;
+	font-size: 22px;
+}
+
+#card>img{
+	width: calc(100vw/3);
+	margin-top: calc(-100vw/15);
+
+}
+
+
+#card{
+	display:grid;
+	grid-template-columns: 1fr auto;
+}
+
+#explanation{
+	margin-left: 15px;
+	font-family: "Pixelify Sans", sans-serif;
+	font-size: 25px;
 }
