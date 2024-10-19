@@ -88,7 +88,7 @@
   		title: "Who's the best cook in the relationship?",
   		type: "mcq",
   		mcq: ["50/50", "Chi", "Myk"],
-  		comment: "Whoever is the best has got cook fr fr"
+  		comment: "Whoever is the best has got to cook more fr fr"
   	},
   	{
   		number: 4,
@@ -186,6 +186,7 @@
 
   	function proceedToGame(player) {
   		player = player;
+		post.push(player);
   		console.log(player);
 
   		// # Show start button and adapt player setting
@@ -257,6 +258,7 @@
   		document.getElementById('answer-container').appendChild(questionElement);
   		document.getElementById('answer-container').style.display = "flex";
   		document.getElementById('answer-container').style.justifyContent = "center";
+		document.getElementById("comment").innerHTML = questions[questionNumber].comment;
   	}
   	
   	function loadQuestion(index){
